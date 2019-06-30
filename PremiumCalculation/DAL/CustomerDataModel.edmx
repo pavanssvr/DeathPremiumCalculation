@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LifeInsuranceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LifeInsurance.dbo.Occupation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Occupation">
+          <Key>
+            <PropertyRef Name="OccupationId" />
+          </Key>
+          <Property Name="OccupationId" Type="int" Nullable="false" />
+          <Property Name="Occupation" Type="nchar" MaxLength="10" />
+          <Property Name="Rating" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LifeInsurance.dbo.OccupationRating' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OccupationRating">
+          <Key>
+            <PropertyRef Name="OccupationRatingId" />
+          </Key>
+          <Property Name="OccupationRatingId" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="nchar" MaxLength="20" />
+          <Property Name="Factor" Type="decimal" Precision="3" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="LifeInsuranceModelStoreContainer">
+          <EntitySet Name="Occupation" EntityType="Self.Occupation" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Occupation].[OccupationId] AS [OccupationId], 
+    [Occupation].[Occupation] AS [Occupation], 
+    [Occupation].[Rating] AS [Rating]
+    FROM [dbo].[Occupation] AS [Occupation]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OccupationRating" EntityType="Self.OccupationRating" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OccupationRating].[OccupationRatingId] AS [OccupationRatingId], 
+    [OccupationRating].[Rating] AS [Rating], 
+    [OccupationRating].[Factor] AS [Factor]
+    FROM [dbo].[OccupationRating] AS [OccupationRating]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LifeInsuranceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Occupation">
+          <Key>
+            <PropertyRef Name="OccupationId" />
+          </Key>
+          <Property Name="OccupationId" Type="Int32" Nullable="false" />
+          <Property Name="Occupation1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Rating" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OccupationRating">
+          <Key>
+            <PropertyRef Name="OccupationRatingId" />
+          </Key>
+          <Property Name="OccupationRatingId" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Factor" Type="Decimal" Precision="3" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="LifeInsuranceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Occupations" EntityType="Self.Occupation" />
+          <EntitySet Name="OccupationRatings" EntityType="Self.OccupationRating" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LifeInsuranceModelStoreContainer" CdmEntityContainer="LifeInsuranceEntities">
+          <EntitySetMapping Name="Occupations">
+            <EntityTypeMapping TypeName="LifeInsuranceModel.Occupation">
+              <MappingFragment StoreEntitySet="Occupation">
+                <ScalarProperty Name="OccupationId" ColumnName="OccupationId" />
+                <ScalarProperty Name="Occupation1" ColumnName="Occupation" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OccupationRatings">
+            <EntityTypeMapping TypeName="LifeInsuranceModel.OccupationRating">
+              <MappingFragment StoreEntitySet="OccupationRating">
+                <ScalarProperty Name="OccupationRatingId" ColumnName="OccupationRatingId" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Factor" ColumnName="Factor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
